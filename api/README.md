@@ -1,24 +1,22 @@
-# README
+## デプロイ
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### api
 
-Things you may want to cover:
+```
+$ aws ecr get-login-password --region ap-northeast-1 | docker login --username AWS --password-stdin 061293269148.dkr.ecr.ap-northeast-1.amazonaws.com
+Login Succeeded
 
-* Ruby version
+Logging in with your password grants your terminal complete access to your account. 
+For better security, log in with a limited-privilege personal access token. Learn more at https://docs.docker.com/go/access-tokens/
 
-* System dependencies
+SubarunoMacBook-puro-3:api subaru$ docker build -f prd/Dockerfile -t api .
+$ docker tag api:latest 061293269148.dkr.ecr.ap-northeast-1.amazonaws.com/api:latest
+$ docker push 061293269148.dkr.ecr.ap-northeast-1.amazonaws.com/api:latest
+```
 
-* Configuration
+### blog-web
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+```
+SubarunoMacBook-puro-3:blog-web subaru$ yarn run build
+$ aws s3 cp ./build s3://blog-subaru-web/ --recursive --profile admin
+```
