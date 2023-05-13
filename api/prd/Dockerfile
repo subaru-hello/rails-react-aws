@@ -12,5 +12,7 @@ RUN gem install bundler
 RUN bundle install --without test development
 ADD . /app
 EXPOSE 3000
+RUN bundle exec rails db:create
+RUN chmod +x /app/entrypoint.sh
 
-CMD ["/bin/sh", "-c", "bundle exec rails db:create && bundle exec rails db:migrate && bundle exec unicorn -p 3000 -c /app/config/unicorn.rb -E production"]
+CMD ["/app/entrypoint.sh"]
