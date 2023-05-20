@@ -12,7 +12,6 @@ RUN gem install bundler
 RUN bundle install --without test development
 ADD . /app
 EXPOSE 3000
-RUN bundle exec rails db:create
 RUN chmod +x /app/entrypoint.sh
 
 CMD ["/app/entrypoint.sh"]

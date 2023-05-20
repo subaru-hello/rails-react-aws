@@ -6,7 +6,7 @@ function Blogs() {
   const [blogs, setBlogs] = useState();
   useEffect(() => {
     const f = async () => {
-      const res = await axiosInstance.get("/blogs");
+      const res = await axiosInstance.get("/todos");
       setBlogs(res.data);
     };
   f();
